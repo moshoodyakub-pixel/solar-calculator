@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar PV System Calculator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Bootstrap for responsive design -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-4">
+        <h1 class="text-center mb-4">Off-Grid Solar PV System Calculator</h1>
+        
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h2 class="card-title h5 mb-0">Step 1: Load Analysis</h2>
+            </div>
+            <div class="card-body">
+                <form id="load-form">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="Enter location (city, country)">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="system-voltage" class="form-label">System Voltage</label>
+                            <select class="form-select" id="system-voltage">
+                                <option value="12">12V System</option>
+                                <option value="24" selected>24V System</option>
+                                <option value="48">48V System</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <h3 class="h5 mt-4">Appliance Load Analysis</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="load-table">
+                            <thead>
+                                <tr>
+                                    <th>Appliance</th>
+                                    <th>Qty</th>
+                                    <th>Power (Watts)</th>
+                                    <th>Hours/Day</th>
+                                    <th>Daily Energy (Wh)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control appliance-name" placeholder="e.g., LED Light"></td>
+                                    <td><input type="number" class="form-control appliance-qty" value="1" min="1"></td>
+                                    <td><input type="number" class="form-control appliance-power" placeholder="Watts"></td>
+                                    <td><input type="number" class="form-control appliance-hours" placeholder="Hours" step="0.1" min="0" max="24"></td>
+                                    <td class="daily-energy">0</td>
+                                    <td><button type="button" class="btn btn-sm btn-danger remove-row">✕</button></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bold">Total Daily Energy:</td>
+                                    <td id="total-energy" class="fw-bold">0 Wh</td>
+                                    <td><button type="button" class="btn btn-sm btn-success" id="add-appliance">+</button></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <label for="autonomy-days" class="form-label">Days of Autonomy</label>
+                            <input type="number" class="form-control" id="autonomy-days" value="2" min="1" max="10">
+                            <div class="form-text">Recommended: 2-3 days</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="battery-dod" class="form-label">Battery Depth of Discharge (%)</label>
+                            <input type="number" class="form-control" id="battery-dod" value="50" min="20" max="80">
+                            <div class="form-text">Recommended: 50% for lead-acid</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="system-efficiency" class="form-label">System Efficiency (%)</label>
+                            <input type="number" class="form-control" id="system-efficiency" value="85" min="70" max="95">
+                            <div class="form-text">Typically 80-90%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn btn-secondary" id="reset-form">Reset</button>
+                        <button type="button" class="btn btn-primary" id="calculate-next">Calculate & Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="alert alert-info" role="alert">
+            <strong>Note:</strong> This is Step 1 of the solar calculator. After entering your load information, click "Calculate & Continue" to proceed to inverter sizing.
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/calculator.js"></script>
+</body>
+</html>
